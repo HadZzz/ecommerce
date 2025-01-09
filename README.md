@@ -27,3 +27,5 @@ Ikuti langkah-langkah berikut untuk menjalankan project ini secara lokal:
    ```bash
    git clone https://github.com/username/e-commerce.git
    cd e-commerce
+
+next tutor: https://medium.com/@aji658911/setup-laravel-dari-clone-project-ea98c99e3e16
