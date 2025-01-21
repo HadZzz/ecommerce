@@ -1,0 +1,9 @@
+/vendor
+/storage
+/tests
+.env
+.env.example
+.git
+.gitignore
+.gitattributes
+README.md 

@@ -26,6 +26,9 @@ class CheckoutController extends Controller
             'shipping_address' => 'required',
             'payment_method' => 'required|in:stripe,bank_transfer,cash_on_delivery',
         ]);
+
+        // Set default payment method to stripe if not specified
+        $paymentMethod = $request->payment_method ?? 'stripe';
         
         // Create order
         $order = Order::create([
@@ -33,7 +36,7 @@ class CheckoutController extends Controller
             'order_number' => 'ORD-' . strtoupper(uniqid()),
             'total_amount' => Cart::getTotal(),
             'shipping_address' => $request->shipping_address,
-            'payment_method' => $request->payment_method,
+            'payment_method' => $paymentMethod,
             'notes' => $request->notes,
             'status' => 'pending'
         ]);
@@ -52,8 +55,8 @@ class CheckoutController extends Controller
         // Clear cart
         Cart::clear();
         
-        // If payment method is Stripe, redirect to payment page
-        if ($request->payment_method === 'stripe') {
+        // Always redirect to payment page for stripe payment
+        if ($paymentMethod === 'stripe') {
             return redirect()->route('payment.process', $order->id);
         }
         
