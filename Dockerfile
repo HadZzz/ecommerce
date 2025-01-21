@@ -28,6 +28,9 @@ WORKDIR /var/www
 # Copy existing application directory
 COPY . .
 
+# Create .env file from example
+COPY .env.example .env
+
 # Install dependencies
 RUN composer install --no-interaction --no-dev --optimize-autoloader
 
