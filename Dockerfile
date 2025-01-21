@@ -28,11 +28,14 @@ WORKDIR /var/www
 # Copy existing application directory
 COPY . .
 
+# Create .env file from example
+COPY .env.example .env
+
 # Install dependencies
 RUN composer install --no-interaction --no-dev --optimize-autoloader
 
 # Generate key, storage link and cache
-RUN php artisan key:generate
+RUN php artisan key:generate --force
 RUN php artisan storage:link
 RUN php artisan config:cache
 RUN php artisan route:cache
