@@ -31,7 +31,7 @@ MIDTRANS_SERVER_KEY=${MIDTRANS_SERVER_KEY}
 MIDTRANS_CLIENT_KEY=${MIDTRANS_CLIENT_KEY}
 MIDTRANS_IS_PRODUCTION=false
 MIDTRANS_IS_SANITIZED=true
-MIDTRANS_IS_3DS=true" > /var/www/.env
+MIDTRANS_IS_3DS=true" > .env
 
 # Setup Laravel
 echo "Setting up Laravel..."
@@ -63,6 +63,6 @@ php artisan view:clear
 # Optimize
 php artisan optimize
 
-# Start the application
-echo "Starting server..."
-php artisan serve --host=0.0.0.0 --port=8080 
+# Start Apache
+echo "Starting Apache..."
+exec "$@" 
