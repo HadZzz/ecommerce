@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} - Online Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @livewireStyles
+    @stack('styles')
 </head>
 <body class="bg-gray-100">
     <!-- Header -->
@@ -14,20 +17,19 @@
             <div class="flex justify-between items-center">
                 <a href="{{ route('home') }}" class="text-xl font-bold">{{ config('app.name') }}</a>
                 
-                <div class="flex items-center space-x-4">
-                    <a href="{{ route('products.index') }}" class="text-gray-600 hover:text-gray-900">Products</a>
-                    <a href="{{ route('cart.index') }}" class="text-gray-600 hover:text-gray-900">
-                        Cart ({{ Cart::getTotalQuantity() }})
-                    </a>
+                <div class="flex items-center space-x-6">
+                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-red-600">Home</a>
+                    <a href="{{ route('products.index') }}" class="text-gray-600 hover:text-red-600">Products</a>
                     @auth
-                        <a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-gray-900">Profile</a>
-                        <form method="POST" action="{{ route('logout') }}">
+                        <a href="{{ route('orders.index') }}" class="text-gray-600 hover:text-red-600">My Orders</a>
+                        <a href="{{ route('wishlist.index') }}" class="text-gray-600 hover:text-red-600">Wishlist</a>
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
-                            <button type="submit" class="text-gray-600 hover:text-gray-900">Logout</button>
+                            <button type="submit" class="text-gray-600 hover:text-red-600">Logout</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Login</a>
-                        <a href="{{ route('register') }}" class="text-gray-600 hover:text-gray-900">Register</a>
+                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-red-600">Login</a>
+                        <a href="{{ route('register') }}" class="text-gray-600 hover:text-red-600">Register</a>
                     @endauth
                 </div>
             </div>
@@ -60,6 +62,10 @@
         </div>
     </footer>
 
+    <!-- Notification Component -->
+    <x-notification />
+
     @livewireScripts
+    @stack('scripts')
 </body>
 </html>
