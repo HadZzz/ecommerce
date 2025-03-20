@@ -65,6 +65,7 @@ A modern e-commerce application built with Laravel, featuring AI-powered recomme
 
 ## Quick Start
 
+
 1. Clone the repository
 ```bash
 git clone https://github.com/yourusername/ecom.git
